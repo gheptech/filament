@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Filament\Resources\Menus\Tables;
+namespace App\Filament\Resources\MegaMenus\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Table;
 
-class MenusTable
+class MegaMenusTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Menu Name')
+                    ->label('Nama Mega Menu')
                     ->searchable()
                     ->sortable(),
 
@@ -25,27 +25,17 @@ class MenusTable
                     ->searchable()
                     ->sortable(),
 
-                // ✅ Inline toggle Active
                 ToggleColumn::make('active')
-                    ->label('Active')
+                    ->label('Aktif')
                     ->sortable(),
-
-                TextColumn::make('created_at')
-                    ->label('Created')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                TextColumn::make('updated_at')
-                    ->label('Updated')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
+            ->filters([
+                // contoh filter aktif/nonaktif
+                \Filament\Tables\Filters\TernaryFilter::make('active')
+                    ->label('Status Aktif'),
+            ])
             ->recordActions([
                 EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

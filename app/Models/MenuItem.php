@@ -10,10 +10,11 @@ class MenuItem extends Model
 {
     protected $fillable = [
         'menu_id',
+        'parent_id',
         'label',
         'url',
         'order',
-        'parent_id',
+        'active',
     ];
 
     // Relasi ke Menu
@@ -31,6 +32,8 @@ class MenuItem extends Model
     // Relasi ke children item
     public function children(): HasMany
     {
-        return $this->hasMany(MenuItem::class, 'parent_id')->orderBy('order');
+        return $this->hasMany(MenuItem::class, 'parent_id')
+            ->where('active', true) // hanya ambil anak aktif
+            ->orderBy('order');
     }
 }

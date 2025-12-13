@@ -11,7 +11,11 @@ class MenuItemForm
     {
         return $schema->schema([
             Forms\Components\Select::make('menu_id')
-                ->relationship('menu', 'name')
+                ->options(
+                    \App\Models\Menu::all()->mapWithKeys(fn ($menu) => [
+                        $menu->id => $menu->name . ($menu->active ? '' : ' (Inactive)')
+                    ])
+                )
                 ->label('Menu')
                 ->required(),
 
@@ -31,9 +35,17 @@ class MenuItemForm
                 ->default(0),
 
             Forms\Components\Select::make('parent_id')
-                ->relationship('parent', 'label')
+                ->options(
+                    \App\Models\MenuItem::all()->mapWithKeys(fn ($item) => [
+                        $item->id => $item->label . ($item->active ? '' : ' (Inactive)')
+                    ])
+                )
                 ->label('Parent Item')
                 ->nullable(),
+                
+            Forms\Components\Toggle::make('active')
+                ->label('Active')
+                ->default(true),
         ]);
     }
 }

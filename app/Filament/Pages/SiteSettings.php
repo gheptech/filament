@@ -55,6 +55,10 @@ class SiteSettings extends Page implements HasForms
                 ->directory('logos')
                 ->disk('public'), // ✅ simpan di storage/app/public
 
+            Forms\Components\TextInput::make('tagline')
+                ->label('Tagline')
+                ->maxLength(255),
+
             Forms\Components\Textarea::make('address')
                 ->label('Alamat'),
 
@@ -107,6 +111,5 @@ class SiteSettings extends Page implements HasForms
         // Isi ulang form dengan data terbaru
         $this->form->fill($this->record->fresh()->toArray());
     }
-
-
+    
 }

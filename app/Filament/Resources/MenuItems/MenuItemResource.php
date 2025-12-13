@@ -9,6 +9,7 @@ use App\Filament\Resources\MenuItems\Schemas\MenuItemForm;
 use App\Filament\Resources\MenuItems\Tables\MenuItemsTable;
 use App\Models\MenuItem;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -19,8 +20,12 @@ class MenuItemResource extends Resource
     protected static ?string $model = MenuItem::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
     protected static ?string $recordTitleAttribute = 'label';
+
+    // ✅ Tambahan untuk grouping di sidebar
+    protected static UnitEnum|string|null $navigationGroup = 'Pengaturan Menu';
+    protected static ?string $navigationLabel = 'Menu Items';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {

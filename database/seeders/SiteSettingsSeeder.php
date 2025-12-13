@@ -15,12 +15,13 @@ class SiteSettingsSeeder extends Seeder
                 'site_name'     => 'My Website',
                 'company_name'  => 'My Company',
                 'logo'          => 'default-logo.png',
-                'address'       => 'Alamat belum diisi',
+                'tagline'       => '-',
+                'address'       => '-',
                 'phone'         => '-',
                 'email'         => 'info@example.com',
-                'facebook'      => '-',
-                'instagram'     => '-',
-                'youtube'       => '-',
+                'facebook'      => 'www.facebook.com',
+                'instagram'     => 'www.instagram.com',
+                'youtube'       => 'www.youtube.com',
                 'linked'      => '-',
             ]);
         }

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu_items', function (Blueprint $table) {
+        Schema::create('mega_menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->constrained()->cascadeOnDelete();
-            $table->string('label'); // Teks menu
-            $table->string('url');   // Link tujuan
-            $table->unsignedInteger('order')->default(0); // urutan
-            $table->foreignId('parent_id')->nullable()->constrained('menu_items')->cascadeOnDelete(); // dropdown
+            $table->string('name');       // Nama mega menu, misalnya "Produk"
+            $table->string('slug')->unique(); // Slug unik, misalnya "mega-produk"
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('mega_menus');
     }
 };

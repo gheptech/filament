@@ -16,8 +16,20 @@
 <nav class="bg-gray-800 text-white">
     <div class="container mx-auto flex justify-between items-center p-4">
         {{-- Logo --}}
-        <div class="text-xl font-bold">
-            {{ config('app.name') }}
+        @php
+            use App\Models\SiteSetting;
+
+            $site = SiteSetting::first();
+        @endphp
+
+        <div class="flex items-center space-x-2 text-xl font-bold">
+            {{-- Logo --}}
+            @if ($site && $site->logo)
+                <img src="{{ asset('storage/' . $site->logo) }}" alt="Logo" class="h-8 w-8">
+            @endif
+
+            {{-- Nama perusahaan --}}
+            <span>{{ $site && $site->company_name ? $site->company_name : config('app.name') }}</span>
         </div>
 
         {{-- Desktop Menu --}}

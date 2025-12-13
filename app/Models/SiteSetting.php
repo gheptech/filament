@@ -15,6 +15,7 @@ class SiteSetting extends Model
         'site_name',
         'company_name',
         'logo',
+        'tagline',
         'address',
         'phone',
         'email',

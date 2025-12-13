@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');   // Nama menu, misalnya "Main Menu"
             $table->string('slug')->unique(); // Slug unik, misalnya "main"
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

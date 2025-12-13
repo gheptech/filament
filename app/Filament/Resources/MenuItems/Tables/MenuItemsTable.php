@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class MenuItemsTable
@@ -14,7 +15,7 @@ class MenuItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('menu.name')   // tampilkan nama menu, bukan ID
+                TextColumn::make('menu.name')
                     ->label('Menu')
                     ->sortable()
                     ->searchable(),
@@ -33,11 +34,16 @@ class MenuItemsTable
                     ->numeric()
                     ->sortable(),
 
-                TextColumn::make('parent.label') // tampilkan label parent item
+                TextColumn::make('parent.label')
                     ->label('Parent Item')
                     ->sortable()
                     ->searchable(),
 
+                // ✅ Inline toggle Active
+                ToggleColumn::make('active')
+                    ->label('Active')
+                    ->sortable(),
+                
                 TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime()
@@ -53,7 +59,7 @@ class MenuItemsTable
             ->filters([])
             ->recordActions([
                 EditAction::make(),
-                \Filament\Actions\DeleteAction::make(), // tambah delete per record
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

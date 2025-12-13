@@ -21,6 +21,11 @@ class MenuForm
                 ->unique(ignoreRecord: true)
                 ->maxLength(255)
                 ->helperText('Slug unik, misalnya: main, footer, sidebar'),
+
+            Forms\Components\Toggle::make('active')
+                ->label('Active')
+                ->default(true)
+                ->helperText('Nonaktifkan jika menu ini tidak ingin ditampilkan di frontend'),
         ]);
     }
 }
